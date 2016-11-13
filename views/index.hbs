@@ -1,2 +1,12 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<form method='POST' action='/post'>
+  <input id='grumblr' placeholder="Tell us what's broken!" type='text' name='content'>
+  <input type='hidden' name='username' value='grumbler'>
+  <input type='submit'>
+</form>
+{{#each posts}}
+  <p>{{this.username}}</p>
+  <textarea readonly>{{this.content}}</textarea>
+  <p>Ups: {{this.ups}}</p>
+  <p>Downs: {{this.downs}}</p>
+  <p>{{this.date}}</p>
+{{/each}}
