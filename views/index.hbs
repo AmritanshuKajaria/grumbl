@@ -1,8 +1,10 @@
+{{#if user}}
 <form method='POST' action='/post'>
   <input id='grumblr' placeholder="Tell us what's broken!" type='text' name='content'>
-  <input type='hidden' name='username' value='grumbler'>
+  <input type='hidden' name='username' value={{user.username}}>
   <input type='submit'>
 </form>
+{{/if}}
 {{#each posts}}
   <p>{{this.username}}</p>
   <textarea readonly>{{this.content}}</textarea>

@@ -4,11 +4,17 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var flash = require('connect-flash');
 
 // Avaliable files
 var index = require('./routes/index');
-var users = require('./routes/users');
 var post = require('./routes/post');
+var login = require('./routes/login');
+var logout = require('./routes/logout');
+var register = require('./routes/register');
 
 var app = express();
 
@@ -22,11 +28,33 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+// passport.js
+app.use(require('express-session')({
+	secret: 'cookiesaregood',
+	resave: false,
+	saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(flash());
+app.use(passport.session());
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
 app.use('/post', post)
+app.use('/login', login);
+app.use('/logout', logout);
+app.use('/register', register);
+
+var User = require('./models/user');
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
+// mongoose
+mongoose.connect('mongodb://localhost/grumble');
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

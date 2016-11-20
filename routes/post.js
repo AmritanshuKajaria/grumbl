@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
-require('../db.js');
 var mongoose = require('mongoose');
-var Post = mongoose.model('Post');
+var Post = require('../models/post.js').Post;
 
 
 /* POST new post. */
