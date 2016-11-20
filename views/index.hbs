@@ -1,5 +1,7 @@
 {{#if user}}
 <form method='POST' action='/post'>
+  <input type="radio" name="department" value="dining">Dining Services
+  <input type="radio" name="department" value="housing">Housing Services</br>
   <input id='grumblr' placeholder="Tell us what's broken!" type='text' name='content'>
   <input type='hidden' name='username' value={{user.username}}>
   <input type='submit'>

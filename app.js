@@ -22,6 +22,7 @@ var post = require('./routes/post');
 var login = require('./routes/login');
 var logout = require('./routes/logout');
 var register = require('./routes/register');
+var departments = require('./routes/departments');
 
 var app = express();
 
@@ -53,6 +54,7 @@ app.use('/post', post)
 app.use('/login', login);
 app.use('/logout', logout);
 app.use('/register', register);
+app.use('/departments', departments);
 
 var User = require('./models/user');
 passport.use(new LocalStrategy(User.authenticate()));

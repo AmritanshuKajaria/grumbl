@@ -12,6 +12,7 @@ var Comment = new Schema({
 var Post = new Schema({
 	username: String,
 	content: String,
+	department: String,
 	comments: [Comment],
 	time: {type: Date, default: moment().toISOString()},
 	ups: Number,
