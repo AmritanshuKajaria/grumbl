@@ -9,6 +9,13 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var flash = require('connect-flash');
 
+// config.json parsing
+var fs = require('fs');
+var path = require('path');
+var fn = path.join(__dirname, 'config.json');
+var data = fs.readFileSync(fn);
+var conf = JSON.parse(data);
+
 // Avaliable files
 var index = require('./routes/index');
 var post = require('./routes/post');
@@ -31,7 +38,7 @@ app.use(cookieParser());
 
 // passport.js
 app.use(require('express-session')({
-	secret: 'cookiesaregood',
+	secret: conf.secret,
 	resave: false,
 	saveUninitialized: false
 }));
@@ -52,9 +59,13 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-
-// mongoose
-mongoose.connect('mongodb://localhost/grumble');
+if (process.env.NODE_ENV == 'PRODUCTION') { 
+ var dbconf = conf.dbconf;
+} else {
+ // if we're not in PRODUCTION mode, then use
+ dbconf = 'mongodb://localhost/grumble';
+}
+mongoose.connect(dbconf);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
