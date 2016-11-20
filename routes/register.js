@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
 
 /* POST register. */
 router.post('/', function(req, res, next) {
-	User.register(new User({username: req.body.username, email: req.body.email}), req.body.password, function(err, user) {
+	User.register(new User({username: req.body.username}), req.body.password, function(err, user) {
 		if( err ) {
 			return res.render('register', {user: user});
 		}
@@ -19,7 +19,7 @@ router.post('/', function(req, res, next) {
 		passport.authenticate('local')(req, res, function() {
 			res.redirect('/');
 		});
-	}));
+	});
 });
 
 module.exports = router;

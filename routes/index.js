@@ -7,7 +7,7 @@ var Post = require('../models/post.js').Post;
 router.get('/', function(req, res, next) {
 	Post.find( function(err, posts, count) {	
 		if( err ) { res.send(err); }
-		res.render('index', { title: 'Grumble', 'posts': posts });
+		res.render('index', { title: 'Grumble', 'posts': posts, user: req.user });
 	});
 });
 
