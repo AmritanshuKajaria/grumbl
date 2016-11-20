@@ -1,15 +1,15 @@
-// db.js
 var mongoose = require('mongoose');
 var moment = require('moment');
+var Schema = mongoose.Schema;
 
-var Comment = new mongoose.Schema({
+var Comment = new Schema({
 	username: String,
 	content: String,
 	time: {type: Date, default: moment().toISOString()},
 	ups: Number,
 	downs: Number
 });
-var Post = new mongoose.Schema({
+var Post = new Schema({
 	username: String,
 	content: String,
 	comments: [Comment],
@@ -18,6 +18,8 @@ var Post = new mongoose.Schema({
 	downs: Number
 });
 
-mongoose.model('Post', Post);
 
-mongoose.connect('mongodb://localhost/grumble');
+module.exports = {
+	Post: mongoose.model('Post', Post),
+	Comment: mongoose.model('Comment', Comment)
+}
