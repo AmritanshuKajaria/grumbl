@@ -50,7 +50,7 @@ app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/post', post)
+app.use('/post', post);
 app.use('/login', login);
 app.use('/logout', logout);
 app.use('/register', register);

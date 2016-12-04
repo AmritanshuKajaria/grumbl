@@ -1,16 +1,27 @@
-{{#if user}}
-<form method='POST' action='/post'>
-  <input type="radio" name="department" value="dining">Dining Services
-  <input type="radio" name="department" value="housing">Housing Services</br>
-  <input id='grumblr' placeholder="Tell us what's broken!" type='text' name='content'>
-  <input type='hidden' name='username' value={{user.username}}>
-  <input type='submit'>
-</form>
-{{/if}}
-{{#each posts}}
-  <p>{{this.username}}</p>
-  <textarea readonly>{{this.content}}</textarea>
-  <p>Ups: {{this.ups}}</p>
-  <p>Downs: {{this.downs}}</p>
-  <p>{{this.date}}</p>
-{{/each}}
+<div class='row'>
+  <div class='column col-xs-9'>
+    {{#if user}}
+    <form method='POST' action='/post'>
+      <input type="radio" name="department" value="dining">Dining Services
+      <input type="radio" name="department" value="housing">Housing Services</br>
+      <input id='grumblr' placeholder="Tell us what's broken!" type='text' name='content'>
+      <input type='hidden' name='username' value={{user.username}}>
+      <input type='submit'>
+    </form>
+    {{/if}}
+    {{#each posts}}
+      <h3>{{this.username}}</h3>
+      <textarea readonly>{{this.content}}</textarea>
+      <p>Ups: {{this.ups}}</p>
+      <p>Downs: {{this.downs}}</p>
+      <p>{{this.date}}</p>
+    {{/each}}
+  </div>
+  <div class='column col-xs-3'>
+    <p>Filter by department!</p>
+    <form method="GET" action="/">
+      <button name="department" value="dining" class="btn btn-primary">Dining Services</button>
+      <button name="department" value="housing" class="btn btn-primary">Housing Services</button>
+    </form>
+  </div>
+</div>
