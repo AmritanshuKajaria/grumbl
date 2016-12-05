@@ -12,8 +12,10 @@
     {{#each posts}}
       <h3>{{this.username}}</h3>
       <textarea readonly>{{this.content}}</textarea>
-      <p>Ups: {{this.ups}}</p>
-      <p>Downs: {{this.downs}}</p>
+      <div id='scoring' class='row'>
+         Ups: {{this.ups}}<button name="id" value="{{this._id}}" class="ups btn btn-primary">Up!</button>
+         Downs: {{this.downs}}<button name="id" value="{{this._id}}" class="downs btn btn-primary">Down!</button>
+      </div>
       <p>{{this.date}}</p>
     {{/each}}
   </div>

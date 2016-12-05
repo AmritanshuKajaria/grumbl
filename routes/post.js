@@ -19,4 +19,20 @@ router.post('/', function(req, res, next) {
 	});
 });
 
+/* POST up id. */
+router.post('/up', function(req, res, next) {
+	Post.findOneAndUpdate({_id: req.body.id}, {$inc:{ups:1}}, function(err, post) {
+		if( err ) { res.send(err); }
+		res.redirect('/');
+	});
+});
+
+/* POST down id. */
+router.post('/down', function(req, res, next) {
+	Post.findOneAndUpdate({_id: req.body.id}, {$inc:{downs:-1}}, function(err, post) {
+		if( err ) { res.send(err); }
+		res.redirect('/');
+	});
+});
+
 module.exports = router;

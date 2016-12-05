@@ -23,4 +23,4 @@ var Post = new Schema({
 module.exports = {
 	Post: mongoose.model('Post', Post),
 	Comment: mongoose.model('Comment', Comment)
-}
+};
