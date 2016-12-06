@@ -12,6 +12,7 @@ var Comment = new Schema({
 var Post = new Schema({
 	username: String,
 	content: String,
+	department: String,
 	comments: [Comment],
 	time: {type: Date, default: moment().toISOString()},
 	ups: Number,
@@ -22,4 +23,4 @@ var Post = new Schema({
 module.exports = {
 	Post: mongoose.model('Post', Post),
 	Comment: mongoose.model('Comment', Comment)
-}
+};
